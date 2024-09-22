@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TODO List</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 400px;
+            margin: 50px auto;
+        }
+
+        #todo-list {
+            margin-top: 15px;
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #todo-list li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background: #f9f9f9;
+            margin-bottom: 5px;
+            border-radius: 5px;
+        }
+
+        .completed {
+            text-decoration: line-through;
+        }
+
+       
+        .delete-btn {
+            cursor: pointer;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>TODO List</h2>
+
+    <div class="d-flex flex-row justify-content">
+        <input type="text" class="form-control" id="new-task" placeholder="Enter a new task">
+        <button class="btn btn-primary ms-2" id="add-task">Add</button>
+    </div>
+
+    <ul id="todo-list"></ul>
+
+    <script>
+        $(document).ready(function() {
+            $('#add-task').on('click', function() {
+                const taskText = $('#new-task').val().trim();
+                if (taskText) {
+                    $('#todo-list').append(`<li><span>${taskText}</span><button id="delete-btn" class="btn btn-danger">Delete</button></li>`);
+                    $('#new-task').val('');
+                }
+            });
+
+            $(document).on('click', '#todo-list li span', function() {
+                $(this).toggleClass('completed');
+            });
+
+            $(document).on('click', '#delete-btn', function() {
+                $(this).parent().remove();
+            });
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+</html>
